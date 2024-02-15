@@ -1,10 +1,15 @@
 const useComment = () => {
   const addComment = (tree, commentId, newComment) => {
     if (tree.id === commentId) {
-      tree.replies.unshift(newComment);
+      tree.replies.unshift({
+        id: new Date().getTime(),
+        text: newComment,
+        replies: [],
+      });
       return tree;
     }
-    const updatedReplies = tree.replies.map((commentItem) =>
+    let updatedReplies = [];
+    updatedReplies = tree.replies.map((commentItem) =>
       addComment(commentItem, commentId, newComment)
     );
     return { ...tree, replies: updatedReplies };

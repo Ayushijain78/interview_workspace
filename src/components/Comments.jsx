@@ -10,7 +10,7 @@ function Comments({ commentData, handleAddComment, handleDeleteComment }) {
       text: comment,
       replies: [],
     };
-    handleAddComment(commentData?.id, newComment);
+    handleAddComment(commentData?.id, comment);
     setComment("");
     setIsReply(false);
   };
@@ -19,6 +19,13 @@ function Comments({ commentData, handleAddComment, handleDeleteComment }) {
   };
   return (
     <div className="container">
+      {commentData.id==1&&<><input
+        type="text"
+        autoFocus
+        value={comment}
+        onChange={(e) => setComment(e.target.value)} /><button className="button add-comment" onClick={handleReply}>
+          add comment
+        </button></>}
       <div className={commentData.text && "comment-section"}>
         <div className="comment-text">{commentData?.text}</div>
         {isReply ? (
